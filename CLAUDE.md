@@ -21,12 +21,15 @@ Mantenha-o curto e atualizado. Quando algo importante for decidido ou aprendido,
 | `superpowers@claude-plugins-official` | `anthropics/claude-plugins-official` | Brainstorming, planos, TDD, depuração sistemática e revisão de código |
 | `watch@claude-video` | `bradautomates/claude-video` | Assistir vídeos (URL ou arquivo): baixa com yt-dlp, extrai quadros com ffmpeg e transcreve |
 | `claude-code-setup@claude-plugins-official` | `anthropics/claude-plugins-official` | Analisa o projeto e recomenda hooks, skills, subagentes e MCPs |
-| `headroom@headroom-marketplace` | `headroomlabs-ai/headroom` | Hooks que iniciam o Headroom (compressão de contexto); inativo sem a CLI `headroom-ai` |
+| `headroom@headroom-marketplace` | `headroomlabs-ai/headroom` | Compressão de contexto via proxy local; inativo nas sessões na nuvem (ver abaixo) |
 | `task-observer@one-skill-to-rule-them-all` | `rebelytics/one-skill-to-rule-them-all` | Observa as sessões e propõe melhorias de skills (log em `skill-observations/`) |
 
 - `/plugin` não funciona nas sessões na nuvem. Use a linha de comando:
   `claude plugin marketplace add <origem> --scope project` e `claude plugin install <plugin>@<marketplace> --scope project`.
   Depois, commite `.claude/settings.json` e envie para `main`.
+- Num container novo, nenhum plugin vem instalado. O hook `SessionStart` roda `scripts/install-plugins.sh`,
+  que instala os plugins ativados que faltam (uns 30 s na primeira vez) e o `yt-dlp`/`deno` do `watch`.
+  Se algum plugin não aparecer, rode `bash scripts/install-plugins.sh` e reinicie a sessão.
 - ECC: perfil de hooks `minimal`, definido por `ECC_HOOK_PROFILE` no bloco `env` de `.claude/settings.json`.
   Ele desliga o GateGuard e mantém os hooks essenciais e de segurança.
   (As opções do plugin, `hook_profile` e `hooks_enabled`, só podem ser salvas em `~/.claude`, que se perde com o container.)
@@ -34,10 +37,12 @@ Mantenha-o curto e atualizado. Quando algo importante for decidido ou aprendido,
   A sincronização na nuvem (skill `cloud-sync`) exige conta paga cmem.ai Pro e não está configurada.
 
 - `watch`: modo Gemini. Lê `GEMINI_API_KEY` das variáveis de ambiente da nuvem (nunca no repositório).
-  Um hook `SessionStart` em `.claude/settings.json` instala `yt-dlp` e `deno` com `uv` quando faltam.
-  A rede da nuvem bloqueia o YouTube; para vídeos do YouTube, use o vidIQ (`vidiq_watch_shortform_content`).
-- `headroom`: o plugin só garante que um Headroom já configurado (`headroom init`) esteja rodando.
-  Sem `uv tool install headroom-ai` e `headroom init`, ele não faz nada (só avisa e sai).
+  **Para assistir a vídeos, sempre invoque a skill `watch:watch`.** Não rode `yt-dlp` direto: o YouTube é
+  bloqueado pela rede do container, mas no modo Gemini o plugin manda o link do YouTube direto ao Google,
+  sem baixar. Só use o vidIQ (gasta créditos) se o usuário pedir ou se o `watch` falhar.
+- `headroom`: só tem efeito em processos `claude` iniciados com `ANTHROPIC_BASE_URL` apontando para o proxy.
+  Na nuvem o provedor é controlado pelo host: o `env` do `settings.json` não redireciona a sessão principal
+  (testado em 2026-10-25), então o plugin fica inativo aqui. Se usar o proxy, rode com `HEADROOM_BEACON=off`.
 
 ## Notas
 

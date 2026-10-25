@@ -2,20 +2,6 @@
   "env": {
     "ECC_HOOK_PROFILE": "minimal"
   },
-  "hooks": {
-    "SessionStart": [
-      {
-        "matcher": "startup",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "command -v yt-dlp >/dev/null || uv tool install -q \"yt-dlp[default,curl-cffi]\"; command -v deno >/dev/null || uv tool install -q deno; exit 0",
-            "timeout": 120
-          }
-        ]
-      }
-    ]
-  },
   "enabledPlugins": {
     "ecc@ecc": true,
     "chrome-devtools-mcp@claude-plugins-official": true,
@@ -63,5 +49,19 @@
         "repo": "rebelytics/one-skill-to-rule-them-all"
       }
     }
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "timeout": 180,
+            "command": "bash \"$CLAUDE_PROJECT_DIR/scripts/install-plugins.sh\""
+          }
+        ]
+      }
+    ]
   }
 }
