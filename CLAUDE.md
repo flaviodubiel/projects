@@ -18,6 +18,7 @@ Mantenha-o curto e atualizado. Quando algo importante for decidido ou aprendido,
 | `ecc@ecc` | `https://github.com/affaan-m/ECC.git` | Agentes, skills, hooks e fluxos de trabalho (TDD, revisão de código, segurança) |
 | `chrome-devtools-mcp@claude-plugins-official` | `anthropics/claude-plugins-official` | Controlar e inspecionar o Chrome (performance, rede, console, acessibilidade) |
 | `claude-mem@thedotmack` | `thedotmack/claude-mem` | Memória entre sessões, guardada localmente no container |
+| `superpowers@claude-plugins-official` | `anthropics/claude-plugins-official` | Brainstorming, planos, TDD, depuração sistemática e revisão de código |
 
 - `/plugin` não funciona nas sessões na nuvem. Use a linha de comando:
   `claude plugin marketplace add <origem> --scope project` e `claude plugin install <plugin>@<marketplace> --scope project`.
