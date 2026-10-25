@@ -34,5 +34,19 @@
         "repo": "bradautomates/claude-video"
       }
     }
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "timeout": 120,
+            "command": "command -v yt-dlp >/dev/null || uv tool install -q \"yt-dlp[default,curl-cffi]\"; command -v deno >/dev/null || uv tool install -q deno; exit 0"
+          }
+        ]
+      }
+    ]
   }
 }

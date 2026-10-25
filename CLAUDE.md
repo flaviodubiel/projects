@@ -30,6 +30,9 @@ Mantenha-o curto e atualizado. Quando algo importante for decidido ou aprendido,
 - `claude-mem`: a memória fica em `~/.claude-mem/`, dentro do container, e se perde ao fim da sessão.
   A sincronização na nuvem (skill `cloud-sync`) exige conta paga cmem.ai Pro e não está configurada.
 
+- `watch`: modo Gemini. Lê `GEMINI_API_KEY` das variáveis de ambiente da nuvem (nunca no repositório).
+  Um hook `SessionStart` em `.claude/settings.json` instala `yt-dlp` e `deno` com `uv` quando faltam.
+
 ## Notas
 
 Registre aqui decisões, preferências e o que for aprendido, com a data.
