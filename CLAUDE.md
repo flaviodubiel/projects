@@ -32,6 +32,9 @@ Mantenha-o curto e atualizado. Quando algo importante for decidido ou aprendido,
 
 - `watch`: modo Gemini. Lê `GEMINI_API_KEY` das variáveis de ambiente da nuvem (nunca no repositório).
   Um hook `SessionStart` em `.claude/settings.json` instala `yt-dlp` e `deno` com `uv` quando faltam.
+  **Para assistir a vídeos, sempre invoque a skill `watch:watch`.** Não rode `yt-dlp` direto: o YouTube é
+  bloqueado pela rede do container, mas no modo Gemini o plugin manda o link do YouTube direto ao Google,
+  sem baixar. Só use o vidIQ (gasta créditos) se o usuário pedir ou se o `watch` falhar.
 
 ## Notas
 
