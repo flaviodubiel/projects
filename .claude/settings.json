@@ -7,7 +7,10 @@
     "chrome-devtools-mcp@claude-plugins-official": true,
     "claude-mem@thedotmack": true,
     "superpowers@claude-plugins-official": true,
-    "watch@claude-video": true
+    "watch@claude-video": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "headroom@headroom-marketplace": true,
+    "task-observer@one-skill-to-rule-them-all": true
   },
   "extraKnownMarketplaces": {
     "ecc": {
@@ -32,6 +35,18 @@
       "source": {
         "source": "github",
         "repo": "bradautomates/claude-video"
+      }
+    },
+    "headroom-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "headroomlabs-ai/headroom"
+      }
+    },
+    "one-skill-to-rule-them-all": {
+      "source": {
+        "source": "github",
+        "repo": "rebelytics/one-skill-to-rule-them-all"
       }
     }
   },

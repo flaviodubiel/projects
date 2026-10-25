@@ -20,6 +20,9 @@ Mantenha-o curto e atualizado. Quando algo importante for decidido ou aprendido,
 | `claude-mem@thedotmack` | `thedotmack/claude-mem` | Memória entre sessões, guardada localmente no container |
 | `superpowers@claude-plugins-official` | `anthropics/claude-plugins-official` | Brainstorming, planos, TDD, depuração sistemática e revisão de código |
 | `watch@claude-video` | `bradautomates/claude-video` | Assistir vídeos (URL ou arquivo): baixa com yt-dlp, extrai quadros com ffmpeg e transcreve |
+| `claude-code-setup@claude-plugins-official` | `anthropics/claude-plugins-official` | Analisa o projeto e recomenda hooks, skills, subagentes e MCPs |
+| `headroom@headroom-marketplace` | `headroomlabs-ai/headroom` | Compressão de contexto via proxy local; inativo nas sessões na nuvem (ver abaixo) |
+| `task-observer@one-skill-to-rule-them-all` | `rebelytics/one-skill-to-rule-them-all` | Observa as sessões e propõe melhorias de skills (log em `skill-observations/`) |
 
 - `/plugin` não funciona nas sessões na nuvem. Use a linha de comando:
   `claude plugin marketplace add <origem> --scope project` e `claude plugin install <plugin>@<marketplace> --scope project`.
@@ -37,9 +40,13 @@ Mantenha-o curto e atualizado. Quando algo importante for decidido ou aprendido,
   **Para assistir a vídeos, sempre invoque a skill `watch:watch`.** Não rode `yt-dlp` direto: o YouTube é
   bloqueado pela rede do container, mas no modo Gemini o plugin manda o link do YouTube direto ao Google,
   sem baixar. Só use o vidIQ (gasta créditos) se o usuário pedir ou se o `watch` falhar.
+- `headroom`: só tem efeito em processos `claude` iniciados com `ANTHROPIC_BASE_URL` apontando para o proxy.
+  Na nuvem o provedor é controlado pelo host: o `env` do `settings.json` não redireciona a sessão principal
+  (testado em 2026-10-25), então o plugin fica inativo aqui. Se usar o proxy, rode com `HEADROOM_BEACON=off`.
 
 ## Notas
 
 Registre aqui decisões, preferências e o que for aprendido, com a data.
 
+- 2026-10-25: OmniRoute não é plugin (é um gateway separado que redireciona o Claude Code para outros provedores); não foi instalado na nuvem.
 - 2026-10-25: plugins ECC, `chrome-devtools-mcp` e `claude-mem` instalados; branch padrão passou a ser `main`.
