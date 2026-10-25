@@ -1,7 +1,8 @@
 {
   "enabledPlugins": {
     "ecc@ecc": true,
-    "chrome-devtools-mcp@claude-plugins-official": true
+    "chrome-devtools-mcp@claude-plugins-official": true,
+    "claude-mem@thedotmack": true
   },
   "extraKnownMarketplaces": {
     "ecc": {
@@ -14,6 +15,12 @@
       "source": {
         "source": "github",
         "repo": "anthropics/claude-plugins-official"
+      }
+    },
+    "thedotmack": {
+      "source": {
+        "source": "github",
+        "repo": "thedotmack/claude-mem"
       }
     }
   }
