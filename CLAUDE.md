@@ -23,7 +23,9 @@ Mantenha-o curto e atualizado. Quando algo importante for decidido ou aprendido,
 - `/plugin` não funciona nas sessões na nuvem. Use a linha de comando:
   `claude plugin marketplace add <origem> --scope project` e `claude plugin install <plugin>@<marketplace> --scope project`.
   Depois, commite `.claude/settings.json` e envie para `main`.
-- ECC: as opções `hooks_enabled` e `hook_profile` estão sem valor.
+- ECC: perfil de hooks `minimal`, definido por `ECC_HOOK_PROFILE` no bloco `env` de `.claude/settings.json`.
+  Ele desliga o GateGuard e mantém os hooks essenciais e de segurança.
+  (As opções do plugin, `hook_profile` e `hooks_enabled`, só podem ser salvas em `~/.claude`, que se perde com o container.)
 - `claude-mem`: a memória fica em `~/.claude-mem/`, dentro do container, e se perde ao fim da sessão.
   A sincronização na nuvem (skill `cloud-sync`) exige conta paga cmem.ai Pro e não está configurada.
 

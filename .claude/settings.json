@@ -24,5 +24,8 @@
         "repo": "thedotmack/claude-mem"
       }
     }
+  },
+  "env": {
+    "ECC_HOOK_PROFILE": "minimal"
   }
 }
