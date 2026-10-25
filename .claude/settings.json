@@ -2,12 +2,29 @@
   "env": {
     "ECC_HOOK_PROFILE": "minimal"
   },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "command -v yt-dlp >/dev/null || uv tool install -q \"yt-dlp[default,curl-cffi]\"; command -v deno >/dev/null || uv tool install -q deno; exit 0",
+            "timeout": 120
+          }
+        ]
+      }
+    ]
+  },
   "enabledPlugins": {
     "ecc@ecc": true,
     "chrome-devtools-mcp@claude-plugins-official": true,
     "claude-mem@thedotmack": true,
     "superpowers@claude-plugins-official": true,
-    "watch@claude-video": true
+    "watch@claude-video": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "headroom@headroom-marketplace": true,
+    "task-observer@one-skill-to-rule-them-all": true
   },
   "extraKnownMarketplaces": {
     "ecc": {
@@ -33,20 +50,18 @@
         "source": "github",
         "repo": "bradautomates/claude-video"
       }
-    }
-  },
-  "hooks": {
-    "SessionStart": [
-      {
-        "matcher": "startup",
-        "hooks": [
-          {
-            "type": "command",
-            "timeout": 120,
-            "command": "command -v yt-dlp >/dev/null || uv tool install -q \"yt-dlp[default,curl-cffi]\"; command -v deno >/dev/null || uv tool install -q deno; exit 0"
-          }
-        ]
+    },
+    "headroom-marketplace": {
+      "source": {
+        "source": "github",
+        "repo": "headroomlabs-ai/headroom"
       }
-    ]
+    },
+    "one-skill-to-rule-them-all": {
+      "source": {
+        "source": "github",
+        "repo": "rebelytics/one-skill-to-rule-them-all"
+      }
+    }
   }
 }
